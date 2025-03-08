@@ -3,25 +3,24 @@ import { useRef, useState } from "react";
 const Timer = () => {
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState<string | number>("00");
-  const [time, setTime] = useState<number>(25 * 60);
+  const timeRef = useRef<number>(25 * 60);
+  const timerRef = useRef<number | null>(null);
 
   const countDown = () => {
-    setTime((prevTime) => {
-      const newTime = prevTime - 1;
-      const minutes = Math.floor(newTime / 60);
-      setMinutes(minutes);
+    if (timeRef.current <= 0) {
+      stopTimer();
+      return;
+    }
 
-      let seconds: string | number = newTime % 60;
-      seconds = seconds < 10 ? `0${seconds}` : seconds;
-      setSeconds(seconds);
+    timeRef.current--;
+    const mins = Math.floor(timeRef.current / 60);
+    let secs: string | number = timeRef.current % 60;
+    secs = secs < 10 ? `0${secs}` : secs;
 
-      console.log(`${minutes}:${seconds}`);
-
-      return newTime;
-    });
-  };
-
-  const timerRef = useRef<number | null>(null);
+    setMinutes(mins);
+    setSeconds(secs);
+    console.log(`${mins}:${secs}`);
+  }
 
   const startTimer = () => {
     if (!timerRef.current) {
@@ -32,7 +31,7 @@ const Timer = () => {
   const stopTimer = () => {
     clearInterval(timerRef.current!);
     timerRef.current = null;
-  }
+  };
 
   return (
     <div>
