@@ -19,10 +19,14 @@ const Timer = () => {
 
     setMinutes(mins);
     setSeconds(secs);
-    console.log(`${mins}:${secs}`);
-  }
+  };
 
   const startTimer = () => {
+    if (timeRef.current === 0) {
+      timeRef.current = 25 * 60;
+      setMinutes(25);
+      setSeconds("00");
+    }
     if (!timerRef.current) {
       timerRef.current = setInterval(countDown, 1000);
     }
@@ -53,7 +57,7 @@ const Timer = () => {
     <div>
       <h2 className="font-bold text-3xl">Timer</h2>
       <p>
-        {minutes}: {seconds}
+        {minutes} : {seconds}
       </p>
       <button onClick={startTimer}>Start</button>
       <button onClick={pauseTimer}>Pause</button>
