@@ -63,6 +63,7 @@ const Timer = () => {
       <button onClick={pauseTimer}>Pause</button>
       <button onClick={stopTimer}>Stop</button>
       <button onClick={skipTimer}>Skip</button>
+      {timeRef.current === 0 && <div>Well done, take a 5 minute break now!</div>}
     </div>
   );
 };
