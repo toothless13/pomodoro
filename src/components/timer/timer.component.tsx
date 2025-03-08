@@ -28,9 +28,25 @@ const Timer = () => {
     }
   };
 
+  const pauseTimer = () => {
+    clearInterval(timerRef.current!);
+    timerRef.current = null;
+  };
+
   const stopTimer = () => {
     clearInterval(timerRef.current!);
     timerRef.current = null;
+    timeRef.current = 25 * 60;
+    setMinutes(25);
+    setSeconds("00");
+  };
+
+  const skipTimer = () => {
+    clearInterval(timerRef.current!);
+    timerRef.current = null;
+    timeRef.current = 0;
+    setMinutes(0);
+    setSeconds("00");
   };
 
   return (
@@ -40,7 +56,9 @@ const Timer = () => {
         {minutes}: {seconds}
       </p>
       <button onClick={startTimer}>Start</button>
+      <button onClick={pauseTimer}>Pause</button>
       <button onClick={stopTimer}>Stop</button>
+      <button onClick={skipTimer}>Skip</button>
     </div>
   );
 };
