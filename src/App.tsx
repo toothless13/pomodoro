@@ -7,7 +7,8 @@ function App() {
   return (
     <>
       <Title />
-      <Card />
+      <Card time={25} />
+      <Card time={5} />
       <Footer />
     </>
   );

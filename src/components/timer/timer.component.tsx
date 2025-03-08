@@ -1,9 +1,13 @@
 import { useRef, useState } from "react";
 
-const Timer = () => {
-  const [minutes, setMinutes] = useState(25);
+interface TimerProps {
+  timer: number;
+}
+
+const Timer: React.FC<TimerProps> = ({timer}) => {
+  const [minutes, setMinutes] = useState(timer);
   const [seconds, setSeconds] = useState<string | number>("00");
-  const timeRef = useRef<number>(25 * 60);
+  const timeRef = useRef<number>(timer * 60);
   const timerRef = useRef<number | null>(null);
 
   const countDown = () => {
@@ -23,8 +27,8 @@ const Timer = () => {
 
   const startTimer = () => {
     if (timeRef.current === 0) {
-      timeRef.current = 25 * 60;
-      setMinutes(25);
+      timeRef.current = timer * 60;
+      setMinutes(timer);
       setSeconds("00");
     }
     if (!timerRef.current) {
@@ -40,8 +44,8 @@ const Timer = () => {
   const stopTimer = () => {
     clearInterval(timerRef.current!);
     timerRef.current = null;
-    timeRef.current = 25 * 60;
-    setMinutes(25);
+    timeRef.current = timer * 60;
+    setMinutes(timer);
     setSeconds("00");
   };
 
