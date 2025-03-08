@@ -57,6 +57,14 @@ const Timer: React.FC<TimerProps> = ({timer}) => {
     setSeconds("00");
   };
 
+  const resetTimer = () => {
+    clearInterval(timerRef.current!);
+    timerRef.current = null;
+    timeRef.current = timer * 60;
+    setMinutes(timer);
+    setSeconds("00");
+  }
+
   return (
     <div>
       <h2 className="font-bold text-3xl">Timer</h2>
@@ -67,6 +75,7 @@ const Timer: React.FC<TimerProps> = ({timer}) => {
       <button onClick={pauseTimer}>Pause</button>
       <button onClick={stopTimer}>Stop</button>
       <button onClick={skipTimer}>Skip</button>
+      <button onClick={resetTimer}>Reset</button>
       {timeRef.current === 0 && <div>Well done, take a 5 minute break now!</div>}
     </div>
   );
