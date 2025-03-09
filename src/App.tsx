@@ -9,6 +9,12 @@ function App() {
       <Title />
       <TimerCard time={25} />
       <TimerCard time={5} />
+      <TimerCard time={25} />
+      <TimerCard time={5} />
+      <TimerCard time={25} />
+      <TimerCard time={5} />
+      <TimerCard time={25} />
+      <TimerCard time={30} />
       <Footer />
     </>
   );
