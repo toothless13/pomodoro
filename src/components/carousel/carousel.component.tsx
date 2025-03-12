@@ -1,7 +1,6 @@
 import useEmblaCarousel from "embla-carousel-react";
 import TimerCard from "../card/timer-card.component";
 import { useEffect } from "react";
-import { DotButton, useDotButton } from "./carousel-dot-button.component";
 import { NextButton, PrevButton, usePrevNextButtons } from "./carousel-arrow-button.component";
 
 export const Carousel = () => {
@@ -12,9 +11,6 @@ export const Carousel = () => {
       console.log(emblaApi.slideNodes());
     }
   }, [emblaApi]);
-
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi);
 
   const {
     prevBtnDisabled,
@@ -58,18 +54,6 @@ export const Carousel = () => {
         <div className="embla__buttons">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </div>
-
-        <div className="embla__dots">
-          {scrollSnaps.map((_, index) => (
-            <DotButton
-              key={index}
-              onClick={() => onDotButtonClick(index)}
-              className={'embla__dot'.concat(
-                index === selectedIndex ? ' embla__dot--selected' : ''
-              )}
-            />
-          ))}
         </div>
       </div>
     </section>
