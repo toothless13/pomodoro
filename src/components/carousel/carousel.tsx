@@ -1,7 +1,11 @@
 import useEmblaCarousel from "embla-carousel-react";
-import TimerCard from "../card/timer-card.component";
+import { TimerCard } from "../card/timer-card";
 import { useEffect } from "react";
-import { NextButton, PrevButton, usePrevNextButtons } from "./carousel-arrow-button.component";
+import {
+  NextButton,
+  PrevButton,
+  usePrevNextButtons,
+} from "./carousel-arrow-button";
 import { TimerCardType } from "../../enums/timer-card.type";
 
 export const Carousel = () => {

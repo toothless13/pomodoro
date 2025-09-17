@@ -6,7 +6,7 @@ interface CardProps {
   type: TimerCardType;
 }
 
-const TimerCard: React.FC<CardProps> = ({ time, type }) => {
+export const TimerCard: React.FC<CardProps> = ({ time, type }) => {
   const {
     minutes,
     seconds,
@@ -43,5 +43,3 @@ const TimerCard: React.FC<CardProps> = ({ time, type }) => {
     </div>
   );
 };
-
-export default TimerCard;
