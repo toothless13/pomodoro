@@ -8,7 +8,7 @@ export const useTimer = (initialTime: number) => {
 
     const countDown = () => {
       if (timeRef.current <= 0) {
-        stopTimer();
+        endTimer();
         return;
       }
   
@@ -61,5 +61,10 @@ export const useTimer = (initialTime: number) => {
       setSeconds("00");
     }
 
-    return { minutes, seconds, startTimer, pauseTimer, stopTimer, skipTimer, resetTimer };
+    const endTimer = () => {
+      clearInterval(timerRef.current!);
+      timerRef.current = null;
+    }
+
+    return { minutes, seconds, startTimer, pauseTimer, stopTimer, skipTimer, resetTimer, endTimer };
 };

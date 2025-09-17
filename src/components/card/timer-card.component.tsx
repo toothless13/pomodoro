@@ -1,10 +1,12 @@
 import { useTimer } from "../../hooks/useTimer";
+import { TimerCardType} from "../../enums/timer-card.type"
 
 interface CardProps {
   time: number;
+  type: TimerCardType;
 }
 
-const TimerCard: React.FC<CardProps> = ({ time }) => {
+const TimerCard: React.FC<CardProps> = ({ time, type }) => {
   const {
     minutes,
     seconds,
@@ -14,6 +16,17 @@ const TimerCard: React.FC<CardProps> = ({ time }) => {
     skipTimer,
     resetTimer,
   } = useTimer(time);
+
+  const getTimerMessage = (type: TimerCardType) => {
+    switch (type) {
+      case TimerCardType.Work: 
+        return 'Well done, take a break now!';
+      case TimerCardType.ShortBreak:
+      case TimerCardType.LongBreak:
+        return 'Time to get back to work!'; 
+    }
+  }
+  
 
   return (
     <div className="w-72 border-2 border-black p-2">
@@ -26,7 +39,7 @@ const TimerCard: React.FC<CardProps> = ({ time }) => {
       <button onClick={stopTimer}>Stop</button>
       <button onClick={skipTimer}>Skip</button>
       <button onClick={resetTimer}>Reset</button>
-      {minutes === 0 && <div>Well done, take a 5 minute break now!</div>}
+      {(minutes === 0 && seconds === '00') && <div>{getTimerMessage(type)}</div>}
     </div>
   );
 };
