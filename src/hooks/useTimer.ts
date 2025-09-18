@@ -1,70 +1,91 @@
 import { useRef, useState } from "react";
+import { EmblaCarouselType } from "embla-carousel";
 
-export const useTimer = (initialTime: number) => {
-    const [minutes, setMinutes] = useState(initialTime);
-    const [seconds, setSeconds] = useState<string | number>("00");
-    const timeRef = useRef<number>(initialTime * 60);
-    const timerRef = useRef<number | null>(null);
+export const useTimer = (
+  initialTime: number,
+  emblaApi: EmblaCarouselType | undefined,
+) => {
+  const [minutes, setMinutes] = useState(initialTime);
+  const [seconds, setSeconds] = useState<string | number>("00");
+  const timeRef = useRef<number>(initialTime * 60);
+  const timerRef = useRef<number | null>(null);
 
-    const countDown = () => {
-      if (timeRef.current <= 0) {
-        endTimer();
-        return;
-      }
-  
-      timeRef.current--;
-      const mins = Math.floor(timeRef.current / 60);
-      let secs: string | number = timeRef.current % 60;
-      secs = secs < 10 ? `0${secs}` : secs;
-  
-      setMinutes(mins);
-      setSeconds(secs);
-    };
-  
-    const startTimer = () => {
-      if (timeRef.current === 0) {
-        timeRef.current = initialTime * 60;
-        setMinutes(initialTime);
-        setSeconds("00");
-      }
-      if (!timerRef.current) {
-        timerRef.current = setInterval(countDown, 1000);
-      }
-    };
-  
-    const pauseTimer = () => {
-      clearInterval(timerRef.current!);
-      timerRef.current = null;
-    };
-  
-    const stopTimer = () => {
-      clearInterval(timerRef.current!);
-      timerRef.current = null;
-      timeRef.current = initialTime * 60;
-      setMinutes(initialTime);
-      setSeconds("00");
-    };
-  
-    const skipTimer = () => {
-      clearInterval(timerRef.current!);
-      timerRef.current = null;
-      timeRef.current = 0;
-      setMinutes(0);
-      setSeconds("00");
-    };
-  
-    const resetTimer = () => {
-      clearInterval(timerRef.current!);
-      timerRef.current = null;
+  const scrollNext = () => {
+    setTimeout(() => {
+      if (!emblaApi) return;
+      emblaApi.scrollNext();
+    }, 1000);
+  };
+
+  const countDown = () => {
+    if (timeRef.current <= 0) {
+      endTimer();
+      return;
+    }
+
+    timeRef.current--;
+    const mins = Math.floor(timeRef.current / 60);
+    let secs: string | number = timeRef.current % 60;
+    secs = secs < 10 ? `0${secs}` : secs;
+
+    setMinutes(mins);
+    setSeconds(secs);
+  };
+
+  const startTimer = () => {
+    if (timeRef.current === 0) {
       timeRef.current = initialTime * 60;
       setMinutes(initialTime);
       setSeconds("00");
     }
-
-    const endTimer = () => {
-      clearInterval(timerRef.current!);
-      timerRef.current = null;
+    if (!timerRef.current) {
+      timerRef.current = setInterval(countDown, 1000);
     }
+  };
 
-    return { minutes, seconds, startTimer, pauseTimer, stopTimer, skipTimer, resetTimer, endTimer };
+  const pauseTimer = () => {
+    clearInterval(timerRef.current!);
+    timerRef.current = null;
+  };
+
+  const stopTimer = () => {
+    clearInterval(timerRef.current!);
+    timerRef.current = null;
+    timeRef.current = initialTime * 60;
+    setMinutes(initialTime);
+    setSeconds("00");
+  };
+
+  const skipTimer = () => {
+    clearInterval(timerRef.current!);
+    timerRef.current = null;
+    timeRef.current = 0;
+    setMinutes(0);
+    setSeconds("00");
+  };
+
+  const resetTimer = () => {
+    clearInterval(timerRef.current!);
+    timerRef.current = null;
+    timeRef.current = initialTime * 60;
+    setMinutes(initialTime);
+    setSeconds("00");
+  };
+
+  const endTimer = () => {
+    clearInterval(timerRef.current!);
+    timerRef.current = null;
+    scrollNext();
+  };
+
+  return {
+    minutes,
+    seconds,
+    startTimer,
+    pauseTimer,
+    stopTimer,
+    skipTimer,
+    resetTimer,
+    endTimer,
+  };
 };

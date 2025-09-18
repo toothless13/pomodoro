@@ -29,7 +29,7 @@ export const Carousel = () => {
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           <div className="embla__slide">
-            <TimerCard time={0.1} type={TimerCardType.Work} />
+            <TimerCard time={0.1} type={TimerCardType.Work} emblaApi={emblaApi} />
           </div>
           <div className="embla__slide">
             <TimerCard time={0.1} type={TimerCardType.ShortBreak} />
