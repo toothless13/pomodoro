@@ -32,25 +32,25 @@ export const Carousel = () => {
             <TimerCard time={0.1} type={TimerCardType.Work} emblaApi={emblaApi} />
           </div>
           <div className="embla__slide">
-            <TimerCard time={0.1} type={TimerCardType.ShortBreak} />
+            <TimerCard time={0.1} type={TimerCardType.ShortBreak} emblaApi={emblaApi} />
           </div>
           <div className="embla__slide">
-            <TimerCard time={25} type={TimerCardType.Work} />
+            <TimerCard time={25} type={TimerCardType.Work} emblaApi={emblaApi} />
           </div>
           <div className="embla__slide">
-            <TimerCard time={5} type={TimerCardType.ShortBreak} />
+            <TimerCard time={5} type={TimerCardType.ShortBreak} emblaApi={emblaApi} />
           </div>
           <div className="embla__slide">
-            <TimerCard time={25} type={TimerCardType.Work} />
+            <TimerCard time={25} type={TimerCardType.Work} emblaApi={emblaApi} />
           </div>
           <div className="embla__slide">
-            <TimerCard time={5} type={TimerCardType.ShortBreak} />
+            <TimerCard time={5} type={TimerCardType.ShortBreak} emblaApi={emblaApi} />
           </div>
           <div className="embla__slide">
-            <TimerCard time={25} type={TimerCardType.Work} />
+            <TimerCard time={25} type={TimerCardType.Work} emblaApi={emblaApi} />
           </div>
           <div className="embla__slide">
-            <TimerCard time={30} type={TimerCardType.LongBreak} />
+            <TimerCard time={30} type={TimerCardType.LongBreak} emblaApi={emblaApi} />
           </div>
         </div>
       </div>
