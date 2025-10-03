@@ -1,5 +1,5 @@
 import { useTimer } from "../../hooks/useTimer";
-import { TimerCardType } from "../../enums/timer-card.type";
+import { TimerCardType } from "../../enums/timerCard.type";
 import { EmblaCarouselType } from "embla-carousel";
 
 interface CardProps {
