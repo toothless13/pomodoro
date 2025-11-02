@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { EmblaCarouselType } from "embla-carousel";
+import { useSettingsStore } from "../stores/useSettingsStore";
 
 export const useTimer = (
   initialTime: number,
@@ -9,6 +10,8 @@ export const useTimer = (
   const [seconds, setSeconds] = useState<string | number>("00");
   const timeRef = useRef<number>(initialTime * 60);
   const timerRef = useRef<number | null>(null);
+
+  const {autoplayEnabled} = useSettingsStore.getState();
 
   const scrollNext = () => {
     setTimeout(() => {
@@ -75,7 +78,7 @@ export const useTimer = (
   const endTimer = () => {
     clearInterval(timerRef.current!);
     timerRef.current = null;
-    scrollNext();
+    if (autoplayEnabled) return scrollNext();
   };
 
   return {

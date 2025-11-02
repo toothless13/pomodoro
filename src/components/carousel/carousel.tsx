@@ -25,7 +25,8 @@ export const Carousel = () => {
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
 
-  const { autoplayEnabled, toggleAutoplay } = useSettingsStore();
+  const autoplayEnabled = useSettingsStore((state) => state.autoplayEnabled );
+  const toggleAutoplay = useSettingsStore((state) => state.toggleAutoplay);
 
   return (
     <>
